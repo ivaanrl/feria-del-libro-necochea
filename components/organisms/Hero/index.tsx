@@ -7,10 +7,11 @@ export interface HeroProps {}
 export const Hero: FC<HeroProps> = () => {
   return (
     <Flex
-      width="100vw"
+      width="100%"
       height="100vh"
       alignItems="center"
       justifyContent="space-between"
+      position="relative"
     >
       <BackgroundBook />
       <Flex

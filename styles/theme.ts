@@ -4,6 +4,7 @@ import { createBreakpoints } from '@chakra-ui/theme-tools';
 const colors = {
   bg: {
     main: '#272727',
+    light: '#4f4f4f',
   },
   text: {
     main: '#ffffff',
