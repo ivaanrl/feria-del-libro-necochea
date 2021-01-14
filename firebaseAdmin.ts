@@ -3,7 +3,7 @@ import * as firebaseAdmin from 'firebase-admin';
 if (!firebaseAdmin.apps.length) {
   firebaseAdmin.initializeApp({
     credential: firebaseAdmin.credential.cert({
-      privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+      privateKey: process.env.private_key.replace(/\\n/g, '\n'),
       clientEmail: process.env.client_email,
       //['project_id' as 'projectId']: process.env.project_id,
       project_id: process.env.project_id,
