@@ -42,6 +42,7 @@ export const CategoryDescriptors: FC<CategoryDescriptorsProps> = () => {
           title={title}
           description={description}
           route={route}
+          key={title}
         />
       ))}
     </Flex>
