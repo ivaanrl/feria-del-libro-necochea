@@ -29,6 +29,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const db = firebaseAdmin.database();
 
   const ref = db.ref('/news/');
+  const bucket = firebaseAdmin.storage().bucket();
   let stories: {
     [title: string]: {
       subtitle: string;
@@ -36,19 +37,17 @@ export const getStaticProps: GetStaticProps = async () => {
     };
   };
 
-  ref.on('value', (snapshot) => {
-    stories = snapshot.val();
-  });
+  await ref.once('value', async (snapshot) => {
+    stories = await snapshot.val();
 
-  const bucket = firebaseAdmin.storage().bucket();
+    Object.keys(stories).forEach((n) => {
+      const formattedName = n.replace(/ /g, '_').toLowerCase();
+      const imageUrl = bucket
+        .file('noticias/' + formattedName + '.jpeg')
+        .publicUrl();
 
-  Object.keys(stories).forEach((n) => {
-    const formattedName = n.replace(/ /g, '_').toLowerCase();
-    const imageUrl = bucket
-      .file('noticias/' + formattedName + '.jpeg')
-      .publicUrl();
-
-    stories[n].imageUrl = imageUrl;
+      stories[n].imageUrl = imageUrl;
+    });
   });
 
   return { props: { stories } };
