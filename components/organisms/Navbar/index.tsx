@@ -1,24 +1,67 @@
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
-import { Box, Flex, IconButton, Text } from '@chakra-ui/react';
-import { AnimatePresence } from 'framer-motion';
+import {
+  Box,
+  chakra,
+  Flex,
+  IconButton,
+  Text,
+  useTheme,
+} from '@chakra-ui/react';
+import {
+  AnimatePresence,
+  motion,
+  useTransform,
+  useViewportScroll,
+} from 'framer-motion';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, useMemo } from 'react';
 import { MobileMenu } from '../MobileMenu';
 
 export interface NavbarProps {}
 
+const MotionBox = chakra(motion.div);
+
 export const Navbar: FC<NavbarProps> = () => {
+  const theme = useTheme();
   const router = useRouter();
   const [activeRoute, setActiveRoute] = useState<string>('/');
   const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);
+
+  const [hasScrolled, setHasScrolled] = useState<boolean>(false);
+  const { scrollYProgress } = useViewportScroll();
+  const yRange = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
+  useEffect(() => {
+    yRange.onChange((v) => {
+      setHasScrolled(v > 0.1);
+    });
+  }, [yRange]);
+
+  /*const sameWidthPopperModifier = useMemo(
+    () => ({
+      name: 'sameWidth',
+      enabled: true,
+      phase: 'beforeWrite' as 'beforeWrite',
+      requires: ['computeStyles'],
+      fn: ({ state }: any) => {
+        state.styles.popper.width = `${state.rects.reference.width + 40}px`;
+      },
+      effect: ({ state }: any) => () => {
+        state.elements.popper.style.width = `${
+          state.elements.reference.offsetWidth + 40
+        }px`;
+      },
+    }),
+    [],
+  );*/
 
   useEffect(() => {
     setActiveRoute(router.pathname);
   }, []);
 
   return (
-    <Flex
+    <MotionBox
+      display="flex"
       width="100%"
       px={{ base: '20px', xl: '30px' }}
       py="10px"
@@ -26,6 +69,12 @@ export const Navbar: FC<NavbarProps> = () => {
       justifyContent="flex-end"
       alignItems="center"
       zIndex="2"
+      animate={{
+        backgroundColor: hasScrolled ? theme.colors.bg.light : 'rgba(0,0,0,0)',
+        transition: {
+          duration: 0.5,
+        },
+      }}
     >
       <Box
         justifyContent="flex-end"
@@ -132,6 +181,6 @@ export const Navbar: FC<NavbarProps> = () => {
       <AnimatePresence>
         {showMobileMenu && <MobileMenu activeRoute={activeRoute} />}
       </AnimatePresence>
-    </Flex>
+    </MotionBox>
   );
 };
