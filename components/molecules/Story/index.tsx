@@ -9,8 +9,8 @@ export interface StoryProps {
 
 export const Story: FC<StoryProps> = ({ title, subtitle, imageUrl }) => {
   return (
-    <GridItem width="100%" height="100%">
-      <Box height="100%" width="100%">
+    <Flex direction="column" width="fit-content" margin="auto" mb="80px">
+      <Box height="300px" width="100%" maxWidth="450px">
         <Img src={imageUrl} width="100%" height="100%" />
       </Box>
       <Text
@@ -25,6 +25,6 @@ export const Story: FC<StoryProps> = ({ title, subtitle, imageUrl }) => {
       <Text color="text.light" fontSize="lg">
         {subtitle}
       </Text>
-    </GridItem>
+    </Flex>
   );
 };
