@@ -4,6 +4,9 @@ import {
   chakra,
   Flex,
   IconButton,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
   Text,
   useTheme,
 } from '@chakra-ui/react';
@@ -37,7 +40,7 @@ export const Navbar: FC<NavbarProps> = () => {
     });
   }, [yRange]);
 
-  /*const sameWidthPopperModifier = useMemo(
+  const sameWidthPopperModifier = useMemo(
     () => ({
       name: 'sameWidth',
       enabled: true,
@@ -53,7 +56,7 @@ export const Navbar: FC<NavbarProps> = () => {
       },
     }),
     [],
-  );*/
+  );
 
   useEffect(() => {
     setActiveRoute(router.pathname);
@@ -72,7 +75,7 @@ export const Navbar: FC<NavbarProps> = () => {
       animate={{
         backgroundColor: hasScrolled ? theme.colors.bg.light : 'rgba(0,0,0,0)',
         transition: {
-          duration: 0.5,
+          duration: 0.3,
         },
       }}
     >
@@ -128,18 +131,56 @@ export const Navbar: FC<NavbarProps> = () => {
             Publicaciones y <br /> trabajos académicos
           </Text>
         </NextLink>
-        <NextLink href="/">
-          <Text
-            color={activeRoute === '/libros' ? 'primary.main' : 'text.inactive'}
-            px="10px"
-            _hover={{
-              cursor: 'pointer',
-              color: 'primary.main',
-            }}
+        <Popover trigger="hover" placement="bottom-start">
+          <PopoverTrigger>
+            <Text
+              color={
+                activeRoute === '/libros' ? 'primary.main' : 'text.inactive'
+              }
+              px="10px"
+              _hover={{
+                cursor: 'pointer',
+                color: 'primary.main',
+              }}
+            >
+              Libros
+            </Text>
+          </PopoverTrigger>
+          <PopoverContent
+            width="fit-content"
+            backgroundColor="bg.light"
+            border="none"
           >
-            Libros
-          </Text>
-        </NextLink>
+            <NextLink href="/biblioteca_digital">
+              <Text
+                px="10px"
+                py="6px"
+                whiteSpace="nowrap"
+                color="text.main"
+                _hover={{
+                  color: 'primary.main',
+                  cursor: 'pointer',
+                }}
+              >
+                Biblioteca digital
+              </Text>
+            </NextLink>
+            <NextLink href="/libros_para_alquilar">
+              <Text
+                px="10px"
+                py="6px"
+                whiteSpace="nowrap"
+                color="text.main"
+                _hover={{
+                  color: 'primary.main',
+                  cursor: 'pointer',
+                }}
+              >
+                Libros para alquilar
+              </Text>
+            </NextLink>
+          </PopoverContent>
+        </Popover>
         <NextLink href="/galeria">
           <Text
             color={

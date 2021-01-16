@@ -1,4 +1,12 @@
-import { chakra, Flex, Text } from '@chakra-ui/react';
+import {
+  Accordion,
+  AccordionButton,
+  AccordionItem,
+  AccordionPanel,
+  chakra,
+  Flex,
+  Text,
+} from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { FC } from 'react';
 import NextLink from 'next/link';
@@ -99,21 +107,74 @@ export const MobileMenu: FC<MobileMenuProps> = ({ activeRoute }) => {
             Publicaciones y trabajos académicos
           </Text>
         </NextLink>
-        <NextLink href="/">
-          <Text
-            color={activeRoute === '/libros' ? 'primary.main' : 'text.inactive'}
-            px="10px"
-            py="15px"
-            fontSize="lg"
-            fontWeight="bold"
-            _hover={{
-              cursor: 'pointer',
+        <Accordion allowToggle>
+          <AccordionItem
+            border="none"
+            _focus={{
+              border: 'none',
+              outline: 'none',
             }}
-            textAlign="center"
+            _active={{
+              border: 'none',
+              outline: 'none',
+            }}
           >
-            Libros
-          </Text>
-        </NextLink>
+            <AccordionButton
+              border="none"
+              dispaly="flex"
+              justifyContent="center"
+              _focus={{
+                border: 'none',
+                outline: 'none',
+              }}
+              _active={{
+                border: 'none',
+                outline: 'none',
+                backgroundColor: 'transparent',
+              }}
+            >
+              <Text
+                color={
+                  activeRoute === '/libros' ? 'primary.main' : 'text.inactive'
+                }
+                px="10px"
+                py="15px"
+                fontSize="lg"
+                fontWeight="bold"
+                _hover={{
+                  cursor: 'pointer',
+                }}
+                textAlign="center"
+              >
+                Libros
+              </Text>
+            </AccordionButton>
+            <AccordionPanel>
+              <NextLink href="biblioteca_digital">
+                <Text
+                  color="text.light"
+                  fontWeight="600"
+                  textAlign="center"
+                  fontSize="lg"
+                  py="5px"
+                >
+                  Biblioteca digital
+                </Text>
+              </NextLink>
+              <NextLink href="libros_para_alquilar">
+                <Text
+                  color="text.light"
+                  fontWeight="600"
+                  textAlign="center"
+                  fontSize="lg"
+                  py="5px"
+                >
+                  Libros para alquilar
+                </Text>
+              </NextLink>
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
         <NextLink href="/galeria">
           <Text
             color={
