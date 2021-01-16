@@ -2,7 +2,6 @@ import { GetStaticProps } from 'next';
 import { Hero } from '../components/organisms';
 import { CategoryDescriptors } from '../components/organisms/CategoryDescriptors';
 import { firebaseAdmin } from '../firebaseAdmin';
-import { firebase } from '../firebase';
 import { HomepageStories } from '../components/organisms/HomepageStories';
 
 export default function Home({
@@ -15,7 +14,6 @@ export default function Home({
     };
   };
 }) {
-  console.log(stories);
   return (
     <>
       <Hero />

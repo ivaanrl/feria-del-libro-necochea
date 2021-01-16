@@ -131,7 +131,11 @@ export const Navbar: FC<NavbarProps> = () => {
             Publicaciones y <br /> trabajos académicos
           </Text>
         </NextLink>
-        <Popover trigger="hover" placement="bottom-start">
+        <Popover
+          trigger="hover"
+          modifiers={[sameWidthPopperModifier]}
+          placement="bottom-start"
+        >
           <PopoverTrigger>
             <Text
               color={
