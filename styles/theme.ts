@@ -20,6 +20,7 @@ const colors = {
   secondary: {
     main: '#2bad6f',
     light: '#38DC8D',
+    test: '#aaa',
   },
 };
 

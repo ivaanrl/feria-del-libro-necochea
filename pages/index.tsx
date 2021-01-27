@@ -3,6 +3,7 @@ import { Hero } from '../components/organisms';
 import { CategoryDescriptors } from '../components/organisms/CategoryDescriptors';
 import { firebaseAdmin } from '../firebaseAdmin';
 import { HomepageStories } from '../components/organisms/HomepageStories';
+import { ListItem, OrderedList } from '@chakra-ui/react';
 
 export default function Home({
   stories,
