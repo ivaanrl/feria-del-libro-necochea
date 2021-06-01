@@ -25,6 +25,7 @@ export default function Home({
 }
 
 export const getStaticProps: GetStaticProps = async () => {
+  console.log('aaaaaaaaaaaaaaaaa');
   const db = firebaseAdmin.database();
 
   const ref = db.ref('/news/');
@@ -49,5 +50,5 @@ export const getStaticProps: GetStaticProps = async () => {
     });
   });
 
-  return { props: { stories } };
+  return { props: { stories: {} } };
 };

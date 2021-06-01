@@ -1,6 +1,7 @@
-import { Box, chakra, Flex, Img, Text } from '@chakra-ui/react';
+import { Box, chakra,  Image, Text } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-import { FC } from 'react';
+import { FC,  } from 'react';
+import { getRandomPlaceholder } from './getRandomPlaceholder';
 
 export interface BookInterface {
   title: string;
@@ -12,6 +13,7 @@ export interface BookInterface {
 const MotionBox = chakra(motion.div);
 
 export const Book: FC<BookInterface> = ({ title, author, year, image }) => {
+
   return (
     <MotionBox
       display="flex"
@@ -24,11 +26,14 @@ export const Book: FC<BookInterface> = ({ title, author, year, image }) => {
       }}
     >
       <Box height="250px" width="200px" mb="10px">
-        <Img
+        <Image
+          fallbackSrc={getRandomPlaceholder()}
+          
           src={image}
           alt={`${title} book cover`}
           width="100%"
           height="100%"
+            
         />
       </Box>
       <Text
